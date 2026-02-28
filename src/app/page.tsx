@@ -70,7 +70,7 @@ export default function Home() {
           📚 Countdown zum Schulbeginn
         </h1>
         <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-12">
-          15. August 2026 - Sachsen-Anhalt
+          15. August 2026 - Klasse 1, Grundschule Stadtfeld
         </p>
 
         {isCountdownComplete ? (
@@ -87,7 +87,7 @@ export default function Home() {
         )}
 
         <p className="mt-12 text-gray-500 dark:text-gray-400 text-sm">
-          Für Nepomuk - 6. Klasse 📖
+          Klasse 1 - Grundschule Stadtfeld 📖
         </p>
       </main>
     </div>
