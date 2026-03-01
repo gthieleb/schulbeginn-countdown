@@ -1,0 +1,34 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea" />
+      <stop offset="100%" style="stop-color:#764ba2" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-opacity="0.1"/>
+    </filter>
+  </defs>
+  
+  <rect width="100%" height="100%" fill="url(#bg)" />
+  
+  <rect x="50" y="50" width="1100" height="530" rx="20" fill="white" filter="url(#shadow)" />
+  
+  <text x="600" y="200" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#2c3e50">
+    Countdown zum Schulbeginn
+  </text>
+  
+  <text x="600" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#7f8c8d">
+    Klasse 1, Grundschule Stadtfeld
+  </text>
+  
+  <text x="600" y="400" text-anchor="middle" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="#2c3e50">
+    167 Tage
+  </text>
+  
+  <text x="600" y="480" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#95a5a6">
+    bis zum 15. August 2026
+  </text>
+  
+  <circle cx="100" cy="100" r="30" fill="#667eea" opacity="0.1"/>
+  <circle cx="1100" cy="530" r="40" fill="#764ba2" opacity="0.1"/>
+</svg>

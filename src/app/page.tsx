@@ -111,6 +111,66 @@ export default function Home() {
           Klasse 1 - Grundschule Stadtfeld 📖
         </p>
       </main>
+      
+      {/* Canvas für Preview */}
+      <canvas 
+        id="preview-canvas" 
+        width="1200" 
+        height="630" 
+        className="hidden"
+        style={{ display: 'none' }}
+      />
+      
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+            // Canvas für Preview rendern
+            const canvas = document.getElementById('preview-canvas');
+            if (canvas) {
+              const ctx = canvas.getContext('2d');
+              if (ctx) {
+                // Hintergrund
+                const gradient = ctx.createLinearGradient(0, 0, 1200, 630);
+                gradient.addColorStop(0, '#667eea');
+                gradient.addColorStop(1, '#764ba2');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, 1200, 630);
+                
+                // Weißer Rahmen mit Schatten
+                ctx.shadowColor = 'rgba(0,0,0,0.1)';
+                ctx.shadowBlur = 20;
+                ctx.shadowOffsetY = 10;
+                ctx.fillStyle = 'white';
+                ctx.roundRect(50, 50, 1100, 530, 20);
+                ctx.fill();
+                
+                // Reset Shadow
+                ctx.shadowColor = 'transparent';
+                ctx.shadowBlur = 0;
+                ctx.shadowOffsetY = 0;
+                
+                // Text
+                ctx.fillStyle = '#2c3e50';
+                ctx.font = 'bold 48px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('Countdown zum Schulbeginn', 600, 200);
+                
+                ctx.font = '24px Arial';
+                ctx.fillStyle = '#7f8c8d';
+                ctx.fillText('Klasse 1, Grundschule Stadtfeld', 600, 280);
+                
+                ctx.font = 'bold 72px Arial';
+                ctx.fillStyle = '#2c3e50';
+                ctx.fillText('${timeLeft.days} Tage', 600, 400);
+                
+                ctx.font = '18px Arial';
+                ctx.fillStyle = '#95a5a6';
+                ctx.fillText('bis zum 15. August 2026', 600, 480);
+              }
+            }
+          `
+        }}
+      />
     </div>
     </>
   );
