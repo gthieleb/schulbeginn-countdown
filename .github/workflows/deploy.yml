@@ -35,6 +35,7 @@ jobs:
 
       - name: Build static HTML
         run: |
+          mkdir -p out
           cp github-pages-index.html out/index.html
           cp public/og-image.svg out/og-image.svg
 
