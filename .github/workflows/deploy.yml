@@ -32,8 +32,8 @@ jobs:
 
       - name: Build static HTML
         run: |
-          cp /home/gun/schulbeginn-countdown/github-pages-index.html out/index.html
-          cp /home/gun/schulbeginn-countdown/public/og-image.svg out/og-image.svg
+          cp github-pages-index.html out/index.html
+          cp public/og-image.svg out/og-image.svg
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
