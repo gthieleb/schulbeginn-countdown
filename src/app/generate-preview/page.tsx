@@ -68,7 +68,7 @@ export default function PreviewGenerator() {
                 <button
                   onClick={() => {
                     const canvas = document.getElementById('countdownCanvas') as HTMLCanvasElement;
-                    const ctx = canvas.getContext('2d');
+                    const ctx = canvas.getContext('2d')!;
                     
                     // Clear canvas
                     ctx.fillStyle = "#2c3e50";
