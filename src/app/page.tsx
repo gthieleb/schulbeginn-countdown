@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Head from "next/head";
 
 const TARGET_DATE = new Date("2026-08-15T00:00:00+02:00");
 
@@ -43,6 +44,12 @@ function CountdownUnit({ value, label }: { value: number; label: string }) {
 export default function Home() {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>(calculateTimeLeft);
   const [mounted, setMounted] = useState(false);
+  const [ogImage, setOgImage] = useState("/og-image");
+
+  useEffect(() => {
+    // Aktualisiere OG Image mit dynamischen Tagen
+    setOgImage(`/og-image?days=${timeLeft.days}`);
+  }, [timeLeft.days]);
 
   useEffect(() => {
     setMounted(true);
@@ -64,7 +71,28 @@ export default function Home() {
     timeLeft.seconds === 0;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100 dark:from-gray-900 dark:via-purple-900 dark:to-gray-900 flex flex-col items-center justify-center p-8">
+    <>
+      <Head>
+        <title>Countdown zum Schulbeginn 2026 - Klasse 1, Grundschule Stadtfeld</title>
+        <meta name="description" content="Countdown zum Schulbeginn am 15. August 2026 für Klasse 1, Grundschule Stadtfeld" />
+        <meta property="og:title" content="Countdown zum Schulbeginn 2026 - Klasse 1, Grundschule Stadtfeld" />
+        <meta property="og:description" content="Countdown zum Schulbeginn am 15. August 2026 für Klasse 1, Grundschule Stadtfeld" />
+        <meta property="og:image" content={`https://gthieleb.github.io/schulbeginn-countdown${ogImage}`} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Countdown zum Schulbeginn 2026 - Klasse 1, Grundschule Stadtfeld" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://gthieleb.github.io/schulbeginn-countdown" />
+        
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Countdown zum Schulbeginn 2026 - Klasse 1, Grundschule Stadtfeld" />
+        <meta name="twitter:description" content="Countdown zum Schulbeginn am 15. August 2026 für Klasse 1, Grundschule Stadtfeld" />
+        <meta name="twitter:image" content={`https://gthieleb.github.io/schulbeginn-countdown${ogImage}`} />
+        
+        <link rel="canonical" href="https://gthieleb.github.io/schulbeginn-countdown" />
+      </Head>
+      
+      <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100 dark:from-gray-900 dark:via-purple-900 dark:to-gray-900 flex flex-col items-center justify-center p-8">
       <main className="text-center">
         <h1 className="text-4xl md:text-6xl font-bold text-gray-800 dark:text-white mb-4">
           📚 Countdown zum Schulbeginn
@@ -91,5 +119,6 @@ export default function Home() {
         </p>
       </main>
     </div>
+    </>
   );
 }
