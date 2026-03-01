@@ -20,13 +20,13 @@ export const metadata: Metadata = {
     description: "Countdown zum Schulbeginn am 15. August 2026 - Klasse 1, Grundschule Stadtfeld",
     images: [
       {
-        url: "https://gthieleb.github.io/schulbeginn-countdown/og-image",
+        url: "https://gthieleb.github.io/schulbeginn-countdown/og-image?v=2026-03-01",
         width: 1200,
         height: 630,
         alt: "Schulbeginn Countdown Vorschau",
       },
     ],
-    url: "https://gthieleb.github.io/schulbeginn-countdown",
+    url: "https://gthieleb.github.io/schulbeginn-countdown?v=2026-03-01",
     type: "website",
   },
 };
