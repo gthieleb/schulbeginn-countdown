@@ -19,6 +19,7 @@ export async function GET() {
           width: 1200,
           height: 630,
           background: '#2c3e50',
+        }}
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
