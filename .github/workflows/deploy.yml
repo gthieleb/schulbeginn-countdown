@@ -35,8 +35,123 @@ jobs:
 
       - name: Build static HTML
         run: |
-          cp github-pages-index.html index.html
-          cp public/og-image.svg og-image.svg
+          # Create static files directly
+          cat > index.html << 'EOF'
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Schulbeginn Countdown 2026</title>
+    <meta name="description" content="Countdown zum Schulbeginn am 15. August 2026 in Sachsen-Anhalt"/>
+    <meta property="og:title" content="Noch {days} Tage bis zum Schulbeginn 2026!"/>
+    <meta property="og:description" content="Countdown zum Schulbeginn am 15. August 2026 - Klasse 1, Grundschule Stadtfeld"/>
+    <meta property="og:url" content="https://gthieleb.github.io/schulbeginn-countdown"/>
+    <meta property="og:image" content="https://gthieleb.github.io/schulbeginn-countdown/og-image"/>
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="630"/>
+    <meta property="og:image:alt" content="Schulbeginn Countdown Vorschau"/>
+    <meta property="og:type" content="website"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:title" content="Noch {days} Tage bis zum Schulbeginn 2026!"/>
+    <meta name="twitter:description" content="Countdown zum Schulbeginn am 15. August 2026 - Klasse 1, Grundschule Stadtfeld"/>
+    <meta name="twitter:image" content="https://gthieleb.github.io/schulbeginn-countdown/og-image"/>
+    <meta name="twitter:image:width" content="1200"/>
+    <meta name="twitter:image:height" content="630"/>
+    <meta name="twitter:image:alt" content="Schulbeginn Countdown Vorschau"/>
+    <link rel="icon" href="favicon.ico" type="image/x-icon"/>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        .container {
+            text-align: center;
+            padding: 2rem;
+            max-width: 800px;
+        }
+        h1 { font-size: 3rem; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .date { font-size: 1.5rem; margin-bottom: 2rem; opacity: 0.9; }
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .countdown-item {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            min-width: 120px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .countdown-number { font-size: 3rem; font-weight: bold; display: block; margin-bottom: 0.5rem; }
+        .countdown-label { font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .info { font-size: 1.2rem; opacity: 0.9; margin-top: 1rem; }
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .countdown { gap: 1rem; }
+            .countdown-item { min-width: 80px; padding: 1rem; }
+            .countdown-number { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 Countdown zum Schulbeginn</h1>
+        <div class="date">15. August 2026 - Klasse 1, Grundschule Stadtfeld</div>
+        <div class="countdown" id="countdown">
+            <div class="countdown-item">
+                <span class="countdown-number" id="days">166</span>
+                <span class="countdown-label">Tage</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="hours">7</span>
+                <span class="countdown-label">Stunden</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="minutes">40</span>
+                <span class="countdown-label">Minuten</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="seconds">4</span>
+                <span class="countdown-label">Sekunden</span>
+            </div>
+        </div>
+        <div class="info">Klasse 1 - Grundschule Stadtfeld 📖</div>
+    </div>
+    <script>
+        const schoolStart = new Date('2026-08-15T00:00:00').getTime();
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = schoolStart - now;
+            if (distance < 0) {
+                document.getElementById('countdown').innerHTML = '🎉 Schulbeginn ist da!';
+                return;
+            }
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+        }
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
+EOF
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
