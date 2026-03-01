@@ -44,13 +44,6 @@ function CountdownUnit({ value, label }: { value: number; label: string }) {
 export default function Home() {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>(calculateTimeLeft);
   const [mounted, setMounted] = useState(false);
-  const [ogImage, setOgImage] = useState("/og-image");
-
-  useEffect(() => {
-    // Aktualisiere OG Image mit dynamischen Tagen
-    setOgImage(`/og-image?days=${timeLeft.days}`);
-  }, [timeLeft.days]);
-
   useEffect(() => {
     setMounted(true);
     const timer = setInterval(() => {
@@ -77,7 +70,7 @@ export default function Home() {
         <meta name="description" content="Countdown zum Schulbeginn am 15. August 2026 für Klasse 1, Grundschule Stadtfeld" />
         <meta property="og:title" content="Countdown zum Schulbeginn 2026 - Klasse 1, Grundschule Stadtfeld" />
         <meta property="og:description" content="Countdown zum Schulbeginn am 15. August 2026 für Klasse 1, Grundschule Stadtfeld" />
-        <meta property="og:image" content={`https://gthieleb.github.io/schulbeginn-countdown${ogImage}`} />
+        <meta property="og:image" content="https://gthieleb.github.io/schulbeginn-countdown/og-image" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Countdown zum Schulbeginn 2026 - Klasse 1, Grundschule Stadtfeld" />
@@ -87,7 +80,7 @@ export default function Home() {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Countdown zum Schulbeginn 2026 - Klasse 1, Grundschule Stadtfeld" />
         <meta name="twitter:description" content="Countdown zum Schulbeginn am 15. August 2026 für Klasse 1, Grundschule Stadtfeld" />
-        <meta name="twitter:image" content={`https://gthieleb.github.io/schulbeginn-countdown${ogImage}`} />
+        <meta name="twitter:image" content="https://gthieleb.github.io/schulbeginn-countdown/og-image" />
         
         <link rel="canonical" href="https://gthieleb.github.io/schulbeginn-countdown" />
       </Head>

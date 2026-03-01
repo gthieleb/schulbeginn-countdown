@@ -1,10 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 
 export const dynamic = 'force-static'
 
-export async function GET(request: NextRequest) {
-  const { searchParams } = new URL(request.url)
-  const days = searchParams.get('days') || '167'
+export async function GET() {
+  const days = '167' // Static value for export
   
   // SVG Canvas für Preview
   const svg = `
