@@ -44,6 +44,7 @@ function CountdownUnit({ value, label }: { value: number; label: string }) {
 export default function Home() {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>(calculateTimeLeft);
   const [mounted, setMounted] = useState(false);
+  
   useEffect(() => {
     setMounted(true);
     const timer = setInterval(() => {
@@ -52,6 +53,23 @@ export default function Home() {
 
     return () => clearInterval(timer);
   }, []);
+  
+  // Aktualisiere OG Meta-Tags dynamisch
+  useEffect(() => {
+    if (mounted) {
+      const ogTitle = `Noch ${timeLeft.days} Tage bis zum Schulbeginn 2026!`;
+      const ogImage = `https://gthieleb.github.io/schulbeginn-countdown/og-image.svg`;
+      
+      // Aktualisiere OG Meta-Tags
+      const ogTitleTag = document.querySelector('meta[property="og:title"]');
+      const ogImageTag = document.querySelector('meta[property="og:image"]');
+      const twitterImageTag = document.querySelector('meta[name="twitter:image"]');
+      
+      if (ogTitleTag) ogTitleTag.setAttribute('content', ogTitle);
+      if (ogImageTag) ogImageTag.setAttribute('content', ogImage);
+      if (twitterImageTag) twitterImageTag.setAttribute('content', ogImage);
+    }
+  }, [timeLeft, mounted]);
 
   if (!mounted) {
     return null;
