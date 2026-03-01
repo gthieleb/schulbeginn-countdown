@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Schulbeginn Countdown 2026
 
-## Getting Started
+Eine Next.js-App für den Countdown zum Schulbeginn am 15. August 2026 in Sachsen-Anhalt.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- 🎯 Live-Countdown mit Sekunden-Updates
+- 📱 Responsive Design für alle Geräte
+- 🌐 Open Graph Meta-Tags für Messenger-Vorschauen
+- 🎨 Dynamische OG-Bilder für Social Media
+- 🔄 Automatische Aktualisierung der Vorschau
+
+## Open Graph Integration
+
+Die App implementiert Open Graph Meta-Tags, damit Messenger wie WhatsApp und Telegram eine ansprechende Vorschau anzeigen:
+
+### Aktuelle Meta-Tags:
+
+```html
+<meta property="og:title" content="Noch {days} Tage bis zum Schulbeginn 2026!">
+<meta property="og:description" content="Countdown zum Schulbeginn am 15. August 2026 - Klasse 1, Grundschule Stadtfeld">
+<meta property="og:image" content="https://schulbeginn-countdown.vercel.app/og-image">
+<meta property="og:url" content="https://schulbeginn-countdown.vercel.app">
+<meta property="og:type" content="website">
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Dynamische OG-Bilder
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Die App generiert automatisch OG-Bilder mit dem aktuellen Countdown-Stand:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `/og-image` - Haupt-OG-Bild mit komplettem Design
+- `/preview` - Einfaches Vorschau-Bild
 
-## Learn More
+## Testing der Vorschau
 
-To learn more about Next.js, take a look at the following resources:
+### Für Telegram:
+1. Sende den Link an [@WebpageBot](https://t.me/webpagebot)
+2. Klicke auf "Update Preview", um die neueste Version zu laden
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Für WhatsApp:
+1. Füge einen Version-Parameter hinzu: `?v=2`
+2. Teile den Link in WhatsApp
+3. Die Vorschau wird bei jedem neuen Teilen aktualisiert
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Entwicklungsumgebung:
+1. Besuche `/generate-preview` für eine Testseite
+2. Hier kannst du Canvas- und OG-Vorschau live sehen
 
-## Deploy on Vercel
+## Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Die App ist für Vercel optimiert. Nach jedem Deployment werden die OG-Bilder automatisch aktualisiert.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Technologien
+
+- Next.js 16
+- React 19
+- TypeScript
+- Tailwind CSS
+- Edge Runtime für OG-Image-Generation
+
+## Zielgruppe
+
+- Eltern von Schulkindern
+- Grundschule Stadtfeld
+- Klasse 1 - Schuljahrgang 2026/2027

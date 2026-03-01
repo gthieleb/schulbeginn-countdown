@@ -15,6 +15,20 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Schulbeginn Countdown 2026",
   description: "Countdown zum Schulbeginn am 15. August 2026 in Sachsen-Anhalt",
+  openGraph: {
+    title: "Noch {days} Tage bis zum Schulbeginn 2026!",
+    description: "Countdown zum Schulbeginn am 15. August 2026 - Klasse 1, Grundschule Stadtfeld",
+    images: [
+      {
+        url: "https://schulbeginn-countdown.vercel.app/og-image",
+        width: 1200,
+        height: 630,
+        alt: "Schulbeginn Countdown Vorschau",
+      },
+    ],
+    url: "https://schulbeginn-countdown.vercel.app",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
