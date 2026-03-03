@@ -78,7 +78,7 @@ export default function Home() {
         <meta name="description" content="Countdown zum Schulbeginn am 15. August 2026 für Klasse 1, Grundschule Stadtfeld" />
         <meta property="og:title" content={`Noch ${timeLeft.days} Tage bis zum Schulbeginn 2026!`} />
         <meta property="og:description" content="Countdown zum Schulbeginn am 15. August 2026 für Klasse 1, Grundschule Stadtfeld" />
-        <meta property="og:image" content="https://gthieleb.github.io/schulbeginn-countdown/og-image.svg" />
+        <meta property="og:image" content="https://9zexw0j4ok.execute-api.eu-central-1.amazonaws.com/og" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Countdown zum Schulbeginn 2026 - Klasse 1, Grundschule Stadtfeld" />
@@ -88,7 +88,7 @@ export default function Home() {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={`Noch ${timeLeft.days} Tage bis zum Schulbeginn 2026!`} />
         <meta name="twitter:description" content="Countdown zum Schulbeginn am 15. August 2026 für Klasse 1, Grundschule Stadtfeld" />
-        <meta name="twitter:image" content="https://gthieleb.github.io/schulbeginn-countdown/og-image.svg" />
+        <meta name="twitter:image" content="https://9zexw0j4ok.execute-api.eu-central-1.amazonaws.com/og" />
         
         <link rel="canonical" href="https://gthieleb.github.io/schulbeginn-countdown" />
       </Head>

@@ -1,65 +1,123 @@
 # Schulbeginn Countdown 2026
 
-Eine Next.js-App für den Countdown zum Schulbeginn am 15. August 2026 in Sachsen-Anhalt.
+Countdown zum Schulbeginn am 15. August 2026 - Klasse 1, Grundschule Stadtfeld
+
+## Architektur
+
+```
+┌─────────────────┐      ┌─────────────────┐
+│  GitHub Pages   │      │   AWS Lambda    │
+│  (Next.js)      │      │  (OG-Image)     │
+│  Hauptseite     │──┬──▶│  Dynamisches    │
+│  Live-Countdown │  │   │  SVG            │
+└─────────────────┘  │   └─────────────────┘
+                     │            ▲
+                     │   og:image URL
+         ┌───────────┴────────────┴───────────┐
+         │     WhatsApp / Telegram            │
+         │     (Vorschau bei Link-Teilung)    │
+         └────────────────────────────────────┘
+```
 
 ## Features
 
-- 🎯 Live-Countdown mit Sekunden-Updates
-- 📱 Responsive Design für alle Geräte
-- 🌐 Open Graph Meta-Tags für Messenger-Vorschauen
-- 🎨 Dynamische OG-Bilder für Social Media
-- 🔄 Automatische Aktualisierung der Vorschau
+- Live-Countdown mit Sekunden-Updates
+- Responsive Design
+- Dynamische OG-Bilder für Messenger-Vorschau
+- Konfigurierbare Detail-Level für OG-Image
 
-## Open Graph Integration
+## OG-Image Detail-Level
 
-Die App implementiert Open Graph Meta-Tags, damit Messenger wie WhatsApp und Telegram eine ansprechende Vorschau anzeigen:
-
-### Aktuelle Meta-Tags:
-
-```html
-<meta property="og:title" content="Noch {days} Tage bis zum Schulbeginn 2026!">
-<meta property="og:description" content="Countdown zum Schulbeginn am 15. August 2026 - Klasse 1, Grundschule Stadtfeld">
-<meta property="og:image" content="https://schulbeginn-countdown.vercel.app/og-image">
-<meta property="og:url" content="https://schulbeginn-countdown.vercel.app">
-<meta property="og:type" content="website">
-```
-
-### Dynamische OG-Bilder
-
-Die App generiert automatisch OG-Bilder mit dem aktuellen Countdown-Stand:
-
-- `/og-image` - Haupt-OG-Bild mit komplettem Design
-- `/preview` - Einfaches Vorschau-Bild
-
-## Testing der Vorschau
-
-### Für Telegram:
-1. Sende den Link an [@WebpageBot](https://t.me/webpagebot)
-2. Klicke auf "Update Preview", um die neueste Version zu laden
-
-### Für WhatsApp:
-1. Füge einen Version-Parameter hinzu: `?v=2`
-2. Teile den Link in WhatsApp
-3. Die Vorschau wird bei jedem neuen Teilen aktualisiert
-
-### Entwicklungsumgebung:
-1. Besuche `/generate-preview` für eine Testseite
-2. Hier kannst du Canvas- und OG-Vorschau live sehen
+| URL | Anzeige |
+|-----|---------|
+| `/og` | Tage, Stunden, Minuten, Sekunden |
+| `/og?detail=days` | Nur Tage |
+| `/og?detail=hours` | Tage + Stunden |
+| `/og?detail=full` | Tage, Stunden, Minuten, Sekunden |
 
 ## Deployment
 
-Die App ist für Vercel optimiert. Nach jedem Deployment werden die OG-Bilder automatisch aktualisiert.
+### 1. Terraform Backend initialisieren (einmalig)
+
+```bash
+cd infrastructure/bootstrap
+terraform init
+terraform apply
+```
+
+### 2. Infrastruktur deployen
+
+```bash
+cd infrastructure
+terraform init -backend-config="bucket=schulbeginn-countdown-tfstate"
+terraform apply
+```
+
+### 3. OG-Image URL in Next.js eintragen
+
+Output aus Schritt 2 kopieren und in `src/app/page.tsx` eintragen:
+
+```tsx
+<meta property="og:image" content="https://XYZ.execute-api.eu-central-1.amazonaws.com/og" />
+```
+
+### 4. GitHub Pages deployen
+
+```bash
+npm run build
+# Output in ./out wird automatisch via GitHub Actions deployt
+```
+
+## OG-Image Rendering Optionen
+
+| Methode | Geschwindigkeit | Qualität | Aufwand |
+|---------|-----------------|----------|---------|
+| **SVG** (Aktuell) | ~50ms | Gut | Niedrig |
+| node-canvas | ~200ms | Sehr gut | Mittel |
+| Puppeteer | ~2000ms | Exakt | Hoch |
+
+**Aktuell:** Erweitertes SVG mit Gradient-Hintergrund, abgerundeten Boxen und konfigurierbarem Detail-Level.
+
+## Kosten (AWS Free Tier)
+
+| Service | Kosten/Monat |
+|---------|--------------|
+| Lambda | ~$0 |
+| API Gateway | ~$0 |
+| S3 (Terraform State) | ~$0.01 |
+| DynamoDB (Locks) | ~$0 |
+| **Gesamt** | **< $0.10** |
+
+## Konfiguration
+
+Terraform Variablen in `infrastructure/variables.tf`:
+
+| Variable | Default | Beschreibung |
+|----------|---------|--------------|
+| `aws_region` | eu-central-1 | AWS Region |
+| `og_image_detail_level` | full | Default Detail-Level |
+| `target_date` | 2026-08-15T00:00:00+02:00 | Zieldatum |
+| `cache_max_age` | 300 | Cache in Sekunden |
 
 ## Technologien
 
-- Next.js 16
+- Next.js 16 (Static Export)
 - React 19
 - TypeScript
 - Tailwind CSS
-- Edge Runtime für OG-Image-Generation
+- AWS Lambda (Node.js 20)
+- API Gateway v2
+- Terraform
 
-## Zielgruppe
+## Lokale Entwicklung
 
-- Eltern von Schulkindern
-- Grundschule Stadtfeld
-- Klasse 1 - Schuljahrgang 2026/2027
+```bash
+npm install
+npm run dev
+```
+
+## Testing OG-Image
+
+- Telegram: [@WebpageBot](https://t.me/webpagebot) - Link senden, "Update Preview"
+- WhatsApp: URL mit `?v=2` Parameter erzwingt neuen Cache
+- Facebook: [Sharing Debugger](https://developers.facebook.com/tools/debug/)
