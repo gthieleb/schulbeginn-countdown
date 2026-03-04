@@ -61,6 +61,20 @@ git commit -m "message"
 git push origin main
 ```
 
+## OG-Image Test
+
+Playwright (empfohlen):
+
+```bash
+npx playwright test
+```
+
+Quick-Test mit curl:
+
+```bash
+curl -s "https://9zexw0j4ok.execute-api.eu-central-1.amazonaws.com/og" | head -20
+```
+
 ## OG-Image URLs
 
 | Detail-Level | URL |
