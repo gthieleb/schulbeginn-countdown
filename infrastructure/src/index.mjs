@@ -53,7 +53,7 @@ function generateCountdownBox(x, y, width, height, value, label, isCompact) {
   
   return `
     <g transform="translate(${x}, ${y})">
-      <rect width="${width}" height="${height}" rx="${boxRx}" fill="url(#boxGradient)" opacity="0.95"/>
+      <rect width="${width}" height="${height}" rx="${boxRx}" fill="url(#bg)"/>
       <rect width="${width}" height="${height}" rx="${boxRx}" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
       <text x="${width/2}" y="${height/2 - 5}" text-anchor="middle" font-family="Arial, sans-serif" font-size="${fontSize}" font-weight="bold" fill="white">
         ${value}
