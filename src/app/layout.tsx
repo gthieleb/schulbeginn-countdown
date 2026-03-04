@@ -16,18 +16,24 @@ export const metadata: Metadata = {
   title: "Schulbeginn Countdown 2026",
   description: "Countdown zum Schulbeginn am 15. August 2026 in Sachsen-Anhalt",
   openGraph: {
-    title: "Noch 167 Tage bis zum Schulbeginn 2026!",
+    title: "Countdown zum Schulbeginn 2026",
     description: "Countdown zum Schulbeginn am 15. August 2026 - Klasse 1, Grundschule Stadtfeld",
     images: [
       {
-        url: "https://gthieleb.github.io/schulbeginn-countdown/og-image.svg",
+        url: "https://9zexw0j4ok.execute-api.eu-central-1.amazonaws.com/og",
         width: 1200,
         height: 630,
-        alt: "Schulbeginn Countdown Vorschau",
+        alt: "Countdown zum Schulbeginn 2026",
       },
     ],
     url: "https://gthieleb.github.io/schulbeginn-countdown",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Countdown zum Schulbeginn 2026",
+    description: "Countdown zum Schulbeginn am 15. August 2026 - Klasse 1, Grundschule Stadtfeld",
+    images: ["https://9zexw0j4ok.execute-api.eu-central-1.amazonaws.com/og"],
   },
 };
 
