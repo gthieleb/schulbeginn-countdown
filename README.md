@@ -26,6 +26,15 @@ Countdown zum Schulbeginn am 15. August 2026 - Klasse 1, Grundschule Stadtfeld
 - Dynamische OG-Bilder für Messenger-Vorschau
 - Konfigurierbare Detail-Level für OG-Image
 
+## Live URLs
+
+| Service | URL |
+|---------|-----|
+| Hauptseite | https://gthieleb.github.io/schulbeginn-countdown/ |
+| OG-Image (Full) | https://9zexw0j4ok.execute-api.eu-central-1.amazonaws.com/og |
+| OG-Image (Days) | https://9zexw0j4ok.execute-api.eu-central-1.amazonaws.com/og?detail=days |
+| OG-Image (Hours) | https://9zexw0j4ok.execute-api.eu-central-1.amazonaws.com/og?detail=hours |
+
 ## OG-Image Detail-Level
 
 | URL | Anzeige |
@@ -53,12 +62,12 @@ terraform init -backend-config="bucket=schulbeginn-countdown-tfstate"
 terraform apply
 ```
 
-### 3. OG-Image URL in Next.js eintragen
+### 3. OG-Image URL
 
-Output aus Schritt 2 kopieren und in `src/app/page.tsx` eintragen:
+Die OG-Image URL ist bereits in `src/app/layout.tsx` konfiguriert:
 
 ```tsx
-<meta property="og:image" content="https://XYZ.execute-api.eu-central-1.amazonaws.com/og" />
+images: [{ url: "https://9zexw0j4ok.execute-api.eu-central-1.amazonaws.com/og" }]
 ```
 
 ### 4. GitHub Pages deployen
